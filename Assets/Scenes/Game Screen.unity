@@ -214,9 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1f672f0d48bf943a307e9e477b2476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 16
-  xRange: 8
-  yRange: 6
+  movementSpeed: 25
+  xRange: 12
+  yRange: 8
   pitchPositionFactor: -2.5
   pitchControlFactor: -20
   yawPositionFactor: 1
@@ -425,7 +425,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
