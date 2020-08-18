@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
@@ -7,12 +8,24 @@ public class Player : MonoBehaviour
 {
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
-    [Tooltip("In ms^-1")][SerializeField] float XSpeed = 1f;
 
+    [Tooltip("In ms^-1")] [SerializeField] float xSpeed = 1f;
+    [Tooltip("In ms^-1")] [SerializeField] float ySpeed = 1f;
+
+    [SerializeField] float xRange = 4f;
+    [SerializeField] float yRange = 4f;
+
+    private float xMaxRange, xMinRange, yMaxRange, yMinRange;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        xMaxRange = transform.localPosition.x + xRange;
+        xMinRange = transform.localPosition.x - xRange;
+        yMaxRange = transform.localPosition.y + yRange;
+        yMinRange = transform.localPosition.y - yRange;
+
+        Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + "Y min: " + yMinRange);
     }
 
     // Update is called once per frame
@@ -30,10 +43,28 @@ public class Player : MonoBehaviour
          * account for the varying times between frames. The longer the time between a frame,
          * the greater the value.
          */
-        float horizontalSpeed = xThrow * XSpeed * Time.deltaTime;
-        float verticalSpeed = yThrow * XSpeed * Time.deltaTime;
+        float xOffset = xThrow * xSpeed * Time.deltaTime;
+        float yOffset = yThrow * ySpeed * Time.deltaTime;
 
-        Debug.Log("Horizontal Speed : " + horizontalSpeed + ". Vertical Speed : " + verticalSpeed);
-        
+        MovePlayer(xOffset, yOffset); 
+    }
+
+    private void MovePlayer(float xOffset, float yOffset)
+    {
+        /*
+         * Normalizing the speed for consistent speed
+         * Link: https://answers.unity.com/questions/1190224/how-can-i-normalize-2d-vectors.html
+         */
+
+        Vector2 totalVectorOffset = new Vector2(xOffset, yOffset);
+        totalVectorOffset.Normalize();
+
+        float xPos = totalVectorOffset.x + transform.localPosition.x;
+        float yPos = totalVectorOffset.y + transform.localPosition.y;
+
+        xPos = Mathf.Clamp(xPos, xMinRange, xMaxRange);
+        yPos = Mathf.Clamp(yPos, yMinRange, yMaxRange);
+
+        transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
     }
 }
