@@ -9,32 +9,50 @@ public class Player : MonoBehaviour
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
 
-    [Tooltip("In ms^-1")] [SerializeField] float xSpeed = 1f;
-    [Tooltip("In ms^-1")] [SerializeField] float ySpeed = 1f;
+    [Tooltip("In ms^-1")] [SerializeField] float movementSpeed = 16f;
 
-    [SerializeField] float xRange = 4f;
-    [SerializeField] float yRange = 4f;
+    [SerializeField] float xRange = 8f;
+    [SerializeField] float yRange = 6f;
 
     private float xMaxRange, xMinRange, yMaxRange, yMinRange;
     
     // Start is called before the first frame update
     void Start()
     {
+        /*
+         * Using local position as we are only concerned about the ships' position relative
+         * to itself, not to the world.
+         */
         xMaxRange = transform.localPosition.x + xRange;
         xMinRange = transform.localPosition.x - xRange;
         yMaxRange = transform.localPosition.y + yRange;
         yMinRange = transform.localPosition.y - yRange;
 
-        Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + "Y min: " + yMinRange);
+        Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + " Y min: " + yMinRange);
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        MovePlayer();
+        RotatePlayer();
+    }
+
+    private void RotatePlayer()
+    {
+        /*
+         * Remember, the order of rotation matters! Rotating the pitch, then the yaw will
+         * be different than rotation the yaw, then the pitch.
+         */
+        transform.localRotation = Quaternion.Euler(30f, 30f, 0f);
+    }
+
+    private void MovePlayer()
     {
         /*
          * xThrow and yThrow determine the sensitivity of the x and y axis, ranging between
          * -1 and 1!
          */
+
         float xThrow = CrossPlatformInputManager.GetAxis(HORIZONTAL);
         float yThrow = CrossPlatformInputManager.GetAxis(VERTICAL);
 
@@ -43,24 +61,12 @@ public class Player : MonoBehaviour
          * account for the varying times between frames. The longer the time between a frame,
          * the greater the value.
          */
-        float xOffset = xThrow * xSpeed * Time.deltaTime;
-        float yOffset = yThrow * ySpeed * Time.deltaTime;
 
-        MovePlayer(xOffset, yOffset); 
-    }
+        float xSpeed = xThrow * movementSpeed * Time.deltaTime;
+        float ySpeed = yThrow * movementSpeed * Time.deltaTime;
 
-    private void MovePlayer(float xOffset, float yOffset)
-    {
-        /*
-         * Normalizing the speed for consistent speed
-         * Link: https://answers.unity.com/questions/1190224/how-can-i-normalize-2d-vectors.html
-         */
-
-        Vector2 totalVectorOffset = new Vector2(xOffset, yOffset);
-        totalVectorOffset.Normalize();
-
-        float xPos = totalVectorOffset.x + transform.localPosition.x;
-        float yPos = totalVectorOffset.y + transform.localPosition.y;
+        float xPos = xSpeed + transform.localPosition.x;
+        float yPos = ySpeed + transform.localPosition.y;
 
         xPos = Mathf.Clamp(xPos, xMinRange, xMaxRange);
         yPos = Mathf.Clamp(yPos, yMinRange, yMaxRange);
