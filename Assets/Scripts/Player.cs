@@ -13,7 +13,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] float xRange = 8f;
     [SerializeField] float yRange = 6f;
+    [SerializeField] float pitchPositionFactor= -2.5f;
+    [SerializeField] float pitchControlFactor = -20f;
+    [SerializeField] float yawPositionFactor = 1f;
+    [SerializeField] float rollControlFactor = 20f;
 
+    private float xThrow, yThrow;
     private float xMaxRange, xMinRange, yMaxRange, yMinRange;
     
     // Start is called before the first frame update
@@ -43,9 +48,33 @@ public class Player : MonoBehaviour
          * Remember, the order of rotation matters! Rotating the pitch, then the yaw will
          * be different than rotation the yaw, then the pitch.
          */
-        transform.localRotation = Quaternion.Euler(30f, 30f, 0f);
+
+        // Controls pitch of ship due to y movement and y position
+        float pitchToPosition = transform.localPosition.y * pitchPositionFactor;
+        float pitchToControl = yThrow * pitchControlFactor;
+        float pitch = pitchToPosition + pitchToControl;
+
+        // Controls yaw of ship due to x position
+        float yaw = transform.localPosition.x * yawPositionFactor;
+
+        // Controls roll of ship due to x movement
+        float roll = xThrow * rollControlFactor;
+
+        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 
+    // Prototype function, tryna have player look at mouse position!
+    private void RotatePlayerToMouseAim()
+    {
+        float rotationFactor = 100f;
+        float xRotation = CrossPlatformInputManager.GetAxis("Mouse X") * rotationFactor * Time.deltaTime;
+        float yRotation = CrossPlatformInputManager.GetAxis("Mouse Y") * rotationFactor * Time.deltaTime;
+
+        xRotation = xRotation + transform.localRotation.x;
+        yRotation = yRotation + transform.localRotation.y;
+
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+    }
     private void MovePlayer()
     {
         /*
@@ -53,8 +82,8 @@ public class Player : MonoBehaviour
          * -1 and 1!
          */
 
-        float xThrow = CrossPlatformInputManager.GetAxis(HORIZONTAL);
-        float yThrow = CrossPlatformInputManager.GetAxis(VERTICAL);
+        xThrow = CrossPlatformInputManager.GetAxis(HORIZONTAL);
+        yThrow = CrossPlatformInputManager.GetAxis(VERTICAL);
 
         /*
          * The speeds are multiplied to their respective throws on top of Time.deltaTime to

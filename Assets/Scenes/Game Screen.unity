@@ -217,6 +217,10 @@ MonoBehaviour:
   movementSpeed: 16
   xRange: 8
   yRange: 6
+  pitchPositionFactor: -2.5
+  pitchControlFactor: -20
+  yawPositionFactor: 1
+  rollControlFactor: -20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
