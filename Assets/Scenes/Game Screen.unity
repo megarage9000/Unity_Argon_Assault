@@ -190,37 +190,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &276597362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8276017674135335047, guid: 39eb73c2b29c3a34ba36211c8de5c057,
-    type: 3}
-  m_PrefabInstance: {fileID: 5999380114228126320}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &276597363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3744744627703172561, guid: 39eb73c2b29c3a34ba36211c8de5c057,
     type: 3}
   m_PrefabInstance: {fileID: 5999380114228126320}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &276597364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276597362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1f672f0d48bf943a307e9e477b2476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 25
-  xRange: 12
-  yRange: 8
-  pitchPositionFactor: -2.5
-  pitchControlFactor: -20
-  yawPositionFactor: 1
-  rollControlFactor: -20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +400,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
