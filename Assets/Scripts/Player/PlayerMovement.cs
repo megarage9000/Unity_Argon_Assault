@@ -4,23 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
 
-    [Tooltip("In ms^-1")] [SerializeField] float movementSpeed = 16f;
-
-    [SerializeField] float xRange = 8f;
-    [SerializeField] float yRange = 6f;
-    [SerializeField] float pitchPositionFactor= -2.5f;
-    [SerializeField] float pitchControlFactor = -20f;
+    [Header("General movement information")]
+    [Tooltip("In ms^-1")] [SerializeField] float movementSpeed = 25f;
+    [Tooltip("In m")] [SerializeField] float xRange = 12f;
+    [Tooltip("In m")] [SerializeField] float yRange = 6f;
+    
+    [Header("Rotation based on position")]
+    [SerializeField] float pitchPositionFactor= -2f;
     [SerializeField] float yawPositionFactor = 1f;
+    
+    [Header("Rotation based on movement")]
+    [SerializeField] float pitchControlFactor = -20f;
     [SerializeField] float rollControlFactor = 20f;
 
+    private bool canMove = true;
     private float xThrow, yThrow;
     private float xMaxRange, xMinRange, yMaxRange, yMinRange;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,18 +41,20 @@ public class Player : MonoBehaviour
         Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + " Y min: " + yMinRange);
     }
 
-    void Update()
+    // Called by string method in CollisionHandler.cs
+    void DisableMovement()
     {
-        MovePlayer();
-        RotatePlayer();
-    }
-    
-    // To Detect collisions!
-    private void OnTriggerEnter(Collider other)
-    {
-        print("Player triggered something");   
+        canMove = false;
     }
 
+    void Update()
+    {
+        if (canMove)
+        {
+            MovePlayer();
+            RotatePlayer();
+        }
+    }
 
     private void RotatePlayer()
     {

@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3744744627703172561}
   - component: {fileID: 276597364}
+  - component: {fileID: 3026580328792628772}
   - component: {fileID: 5750786599922674055}
   m_Layer: 0
   m_Name: Player Ship
@@ -82,9 +83,21 @@ MonoBehaviour:
   xRange: 12
   yRange: 6
   pitchPositionFactor: -2
-  pitchControlFactor: -20
   yawPositionFactor: 1
+  pitchControlFactor: -20
   rollControlFactor: -20
+--- !u!114 &3026580328792628772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276017674135335047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1551b0960d8239f4b87286e50c15ad41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &5750786599922674055
 BoxCollider:
   m_ObjectHideFlags: 0
