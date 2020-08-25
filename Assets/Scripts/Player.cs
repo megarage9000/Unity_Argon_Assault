@@ -41,6 +41,13 @@ public class Player : MonoBehaviour
         MovePlayer();
         RotatePlayer();
     }
+    
+    // To Detect collisions!
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Player triggered something");   
+    }
+
 
     private void RotatePlayer()
     {
