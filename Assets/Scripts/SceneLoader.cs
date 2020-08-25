@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameSceneLoader : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     [SerializeField] int gameSceneLoadDelay = 1;
-
-
-    private void Awake()
+    private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-    }
-    void Start()
-    {
-        Invoke("LoadGameScene", gameSceneLoadDelay);   
+        Invoke("LoadGameScene", gameSceneLoadDelay);
     }
 
     private void LoadGameScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(++currentSceneIndex);
- 
     }
 }
