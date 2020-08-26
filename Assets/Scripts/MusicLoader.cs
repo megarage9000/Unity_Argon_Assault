@@ -7,7 +7,18 @@ public class MusicLoader : MonoBehaviour
 {
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+
+        // Mimicking Singleton Pattern!
+
+        int numMusicPlayers = FindObjectsOfType<MusicLoader>().Length;
+        if(numMusicPlayers > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
     
 }
