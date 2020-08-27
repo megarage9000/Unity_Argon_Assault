@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111b7cfb672629a468ed41ac6ebd4946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathExplosionFX: {fileID: 2021320492543802401, guid: 14aeff0ada1308e4a9c49ac27b7cd627,
+    type: 3}
+  Parent: {fileID: 3171608446320459614, guid: 743985094250b9947ba47f4aedee491a, type: 3}
 --- !u!1001 &8201518070324139733
 PrefabInstance:
   m_ObjectHideFlags: 0

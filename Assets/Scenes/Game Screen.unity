@@ -531,6 +531,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447900746}
     m_Modifications:
+    - target: {fileID: -5669429228335330889, guid: 212cafd97a89054449a50c954c86a123,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     - target: {fileID: 4289259849059617878, guid: 212cafd97a89054449a50c954c86a123,
         type: 3}
       propertyPath: m_Name
@@ -593,6 +598,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 212cafd97a89054449a50c954c86a123, type: 3}
+--- !u!1 &1150120289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150120290}
+  m_Layer: 0
+  m_Name: WorldParticles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1150120290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150120289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468866530
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +1021,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.352
       objectReference: {fileID: 0}
+    - target: {fileID: 1839480062870359574, guid: 636119eaf083f574191a5fdecee245da,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     - target: {fileID: 3703080199304029279, guid: 636119eaf083f574191a5fdecee245da,
         type: 3}
       propertyPath: m_Name
@@ -1060,6 +1100,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 137.781
       objectReference: {fileID: 0}
+    - target: {fileID: 3130977776319692218, guid: ca139448e0e620848a9a992149bf67e3,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca139448e0e620848a9a992149bf67e3, type: 3}
 --- !u!4 &3439146988202993715 stripped
@@ -1075,6 +1120,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447900746}
     m_Modifications:
+    - target: {fileID: -5669429228335330889, guid: 212cafd97a89054449a50c954c86a123,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     - target: {fileID: 4289259849059617878, guid: 212cafd97a89054449a50c954c86a123,
         type: 3}
       propertyPath: m_Name
@@ -1287,6 +1337,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447900746}
     m_Modifications:
+    - target: {fileID: -5407020437772473993, guid: 7de270f93f540754c8336e3e3ae4e1fb,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     - target: {fileID: 211748541378416604, guid: 7de270f93f540754c8336e3e3ae4e1fb,
         type: 3}
       propertyPath: m_Name
@@ -1356,6 +1411,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447900746}
     m_Modifications:
+    - target: {fileID: -4810053551837767812, guid: c99181d6513c7844cb938846253f368c,
+        type: 3}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1150120290}
     - target: {fileID: 8971664952834906289, guid: c99181d6513c7844cb938846253f368c,
         type: 3}
       propertyPath: m_LocalPosition.x

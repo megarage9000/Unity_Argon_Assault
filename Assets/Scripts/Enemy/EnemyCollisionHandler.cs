@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnemyCollisionHandler : MonoBehaviour
 {
 
+    [SerializeField] GameObject DeathExplosionFX;
+    [SerializeField] Transform Parent;
     private void Start()
     {
         SetUpCollider();
@@ -19,7 +21,8 @@ public class EnemyCollisionHandler : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        print(gameObject.name + " Hit by " + other.name);
+        GameObject explosion = Instantiate(DeathExplosionFX, transform.position, Quaternion.identity);
+        explosion.transform.parent = Parent;
         Destroy(gameObject);
     }
 }
