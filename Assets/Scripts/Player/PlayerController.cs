@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Rotation based on movement")]
     [SerializeField] float pitchControlFactor = -20f;
     [SerializeField] float rollControlFactor = 20f;
+
+    [Header("Weapons")]
+    [SerializeField] GameObject[] guns;
 
     private bool canMove = true;
     private float xThrow, yThrow;
@@ -53,8 +56,10 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
             RotatePlayer();
+            FireGuns();
         }
     }
+
 
     private void RotatePlayer()
     {
@@ -115,5 +120,32 @@ public class PlayerMovement : MonoBehaviour
         yPos = Mathf.Clamp(yPos, yMinRange, yMaxRange);
 
         transform.localPosition = new Vector3(xPos, yPos, transform.localPosition.z);
+    }
+    private void FireGuns()
+    {
+        if (CrossPlatformInputManager.GetButton("Fire"))
+        {
+            ActivateGuns();
+        }
+        else
+        {
+            DeactivateGuns();
+        }
+    }
+
+    private void DeactivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(false);
+        }
+    }
+
+    private void ActivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(true);
+        }
     }
 }

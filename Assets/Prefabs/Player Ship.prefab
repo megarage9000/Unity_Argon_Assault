@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 276597364}
   - component: {fileID: 3026580328792628772}
   - component: {fileID: 5750786599922674055}
+  - component: {fileID: 564704687}
   m_Layer: 0
   m_Name: Player Ship
   m_TagString: Untagged
@@ -87,6 +88,9 @@ MonoBehaviour:
   yawPositionFactor: 1
   pitchControlFactor: -20
   rollControlFactor: -20
+  guns:
+  - {fileID: 6083704950900058238}
+  - {fileID: 6351179924724662524}
 --- !u!114 &3026580328792628772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,11 +113,27 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8276017674135335047}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.5, y: 4, z: 4.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &564704687
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276017674135335047}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &9171518337758639237
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 950877498468451570, guid: a5584fd34bd2a3641b52ab9b1ab56098,
         type: 3}
       propertyPath: m_Name
-      value: PlayerRockets
+      value: RightRockets
       objectReference: {fileID: 0}
     - target: {fileID: 950877498468451571, guid: a5584fd34bd2a3641b52ab9b1ab56098,
         type: 3}
@@ -358,6 +378,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5584fd34bd2a3641b52ab9b1ab56098, type: 3}
+--- !u!1 &6351179924724662524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950877498468451570, guid: a5584fd34bd2a3641b52ab9b1ab56098,
+    type: 3}
+  m_PrefabInstance: {fileID: 6129925148311127054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6351179924724662525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 950877498468451571, guid: a5584fd34bd2a3641b52ab9b1ab56098,
@@ -374,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 950877498468451570, guid: a5584fd34bd2a3641b52ab9b1ab56098,
         type: 3}
       propertyPath: m_Name
-      value: PlayerRockets
+      value: LeftRockets
       objectReference: {fileID: 0}
     - target: {fileID: 950877498468451571, guid: a5584fd34bd2a3641b52ab9b1ab56098,
         type: 3}
@@ -433,6 +459,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5584fd34bd2a3641b52ab9b1ab56098, type: 3}
+--- !u!1 &6083704950900058238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 950877498468451570, guid: a5584fd34bd2a3641b52ab9b1ab56098,
+    type: 3}
+  m_PrefabInstance: {fileID: 6440036861090016396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6083704950900058239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 950877498468451571, guid: a5584fd34bd2a3641b52ab9b1ab56098,
