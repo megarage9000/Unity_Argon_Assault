@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 4289259849059617878}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4292994375097263464}
   - {fileID: 4291062502031443246}
@@ -497,6 +497,7 @@ MonoBehaviour:
     type: 3}
   Parent: {fileID: 3171608446320459614, guid: 743985094250b9947ba47f4aedee491a, type: 3}
   pointsOnDeath: 5
+  hits: 5
 --- !u!1 &4289294398667010904
 GameObject:
   m_ObjectHideFlags: 0

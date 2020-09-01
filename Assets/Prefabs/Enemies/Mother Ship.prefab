@@ -16,6 +16,7 @@ MonoBehaviour:
     type: 3}
   Parent: {fileID: 3171608446320459614, guid: 743985094250b9947ba47f4aedee491a, type: 3}
   pointsOnDeath: 20
+  hits: 50
 --- !u!1001 &4630288398501018966
 PrefabInstance:
   m_ObjectHideFlags: 0

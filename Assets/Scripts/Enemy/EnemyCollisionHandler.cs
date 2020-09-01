@@ -9,13 +9,13 @@ public class EnemyCollisionHandler : MonoBehaviour
     [SerializeField] GameObject DeathExplosionFX;
     [SerializeField] Transform Parent;
     [SerializeField] int pointsOnDeath = 10;
+    [SerializeField] int hits = 10;
 
     ScoreBoard scoreBoard;
-    private bool isDead;
+    
 
     private void Start()
     {
-        isDead = false;
         SetUpCollider();
         scoreBoard = FindObjectOfType<ScoreBoard>();
     }
@@ -28,14 +28,19 @@ public class EnemyCollisionHandler : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (!isDead)
+        UpdateScoreBoard();
+        hits--;
+        if(hits < 1)
         {
-            GameObject explosion = Instantiate(DeathExplosionFX, transform.position, Quaternion.identity);
-            explosion.transform.parent = Parent;
-            UpdateScoreBoard();
-            Destroy(gameObject);
-            isDead = true;
+            KillEnemy();
         }
+    }
+
+    private void KillEnemy()
+    {
+        GameObject explosion = Instantiate(DeathExplosionFX, transform.position, Quaternion.identity);
+        explosion.transform.parent = Parent;
+        Destroy(gameObject);
     }
 
     private void UpdateScoreBoard()
