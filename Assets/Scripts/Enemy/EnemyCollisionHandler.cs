@@ -8,9 +8,16 @@ public class EnemyCollisionHandler : MonoBehaviour
 
     [SerializeField] GameObject DeathExplosionFX;
     [SerializeField] Transform Parent;
+    [SerializeField] int pointsOnDeath = 10;
+
+    ScoreBoard scoreBoard;
+    private bool isDead;
+
     private void Start()
     {
+        isDead = false;
         SetUpCollider();
+        scoreBoard = FindObjectOfType<ScoreBoard>();
     }
 
     private void SetUpCollider()
@@ -21,8 +28,18 @@ public class EnemyCollisionHandler : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        GameObject explosion = Instantiate(DeathExplosionFX, transform.position, Quaternion.identity);
-        explosion.transform.parent = Parent;
-        Destroy(gameObject);
+        if (!isDead)
+        {
+            GameObject explosion = Instantiate(DeathExplosionFX, transform.position, Quaternion.identity);
+            explosion.transform.parent = Parent;
+            UpdateScoreBoard();
+            Destroy(gameObject);
+            isDead = true;
+        }
+    }
+
+    private void UpdateScoreBoard()
+    {
+        scoreBoard.UpdateScore(pointsOnDeath);
     }
 }

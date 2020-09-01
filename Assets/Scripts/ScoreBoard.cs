@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO implement a combo timer! 
+
 public class ScoreBoard : MonoBehaviour
 {
-    [SerializeField] int scoreIncrement = 12;
     private Text scoreText;
     private int score;
     
@@ -16,9 +17,10 @@ public class ScoreBoard : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    public void UpdateScore()
+    public void UpdateScore(int scoreIncrement)
     {
         score += scoreIncrement;
+        scoreText.text = score.ToString();
     }
 
 }
