@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             MovePlayer();
-            RotatePlayer();
+            //RotatePlayer();
+            RotatePlayerToMouseAim();
             FireGuns();
         }
     }
@@ -85,14 +86,15 @@ public class PlayerController : MonoBehaviour
     // Prototype function, tryna have player look at mouse position!
     private void RotatePlayerToMouseAim()
     {
-        float rotationFactor = 100f;
-        float xRotation = CrossPlatformInputManager.GetAxis("Mouse X") * rotationFactor * Time.deltaTime;
-        float yRotation = CrossPlatformInputManager.GetAxis("Mouse Y") * rotationFactor * Time.deltaTime;
+        var mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        var playerPos = Camera.main.WorldToScreenPoint(transform.position);
 
-        xRotation = xRotation + transform.localRotation.x;
-        yRotation = yRotation + transform.localRotation.y;
+        Debug.Log("mousePos: " + mousePos);
+        Debug.Log("playerPos: " + playerPos);
+/*        var posDifference = mousePos - playerPos;
 
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        transform.rotation = Quaternion.LookRotation(posDifference, Vector3.up);*/
+
     }
     private void MovePlayer()
     {
