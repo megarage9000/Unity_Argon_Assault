@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
 {
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
+    const string MOUSE_X = "Mouse X";
+    const string MOUSE_Y = "Mouse Y";
+
+    const float MAX_ROT_Y = 90f;
+    const float MAX_ROT_X = 90f;
 
     [Header("General movement information")]
     [Tooltip("In ms^-1")] [SerializeField] float movementSpeed = 25f;
@@ -25,9 +30,17 @@ public class PlayerController : MonoBehaviour
     [Header("Weapons")]
     [SerializeField] GameObject[] guns;
 
+    [Header("Aim parameters")]
+    [Range(0, 1)]
+    [SerializeField] float rotationSensitivity = 0.5f;
+    [SerializeField] float aimZ = 10000f;
+   
     private bool canMove = true;
     private float xThrow, yThrow;
+    private float rotationX, rotationY;
     private float xMaxRange, xMinRange, yMaxRange, yMinRange;
+    private Camera mainCam;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +54,11 @@ public class PlayerController : MonoBehaviour
         yMaxRange = transform.localPosition.y + yRange;
         yMinRange = transform.localPosition.y - yRange;
 
+        Vector3 rotation = transform.localRotation.eulerAngles;
+        rotationX = rotation.x;
+        rotationY = rotation.y;
+        mainCam = gameObject.transform.parent.GetComponent<Camera>();
+        
         Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + " Y min: " + yMinRange);
     }
 
@@ -56,8 +74,15 @@ public class PlayerController : MonoBehaviour
         {
             MovePlayer();
             //RotatePlayer();
-            RotatePlayerToMouseAim();
             FireGuns();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (canMove)
+        {
+            RotatePlayerToMouseAim();
         }
     }
 
@@ -86,15 +111,15 @@ public class PlayerController : MonoBehaviour
     // Prototype function, tryna have player look at mouse position!
     private void RotatePlayerToMouseAim()
     {
-        var mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        var playerPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 mousePositionOnScreen = Input.mousePosition;
+        Vector3 positionOnScreen = mainCam.WorldToScreenPoint(transform.position);
+        positionOnScreen.z = 0;
+        mousePositionOnScreen.z = aimZ;
 
-        Debug.Log("mousePos: " + mousePos);
-        Debug.Log("playerPos: " + playerPos);
-/*        var posDifference = mousePos - playerPos;
-
-        transform.rotation = Quaternion.LookRotation(posDifference, Vector3.up);*/
-
+        Vector3 relativePos = mousePositionOnScreen - positionOnScreen;
+        // relativePos = mainCam.ScreenToWorldPoint(relativePos);
+        Quaternion lookRotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        transform.localRotation = lookRotation;
     }
     private void MovePlayer()
     {
