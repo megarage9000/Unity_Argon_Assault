@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Aim parameters")]
     [Range(0, 1)]
     [SerializeField] float rotationSensitivity = 0.5f;
-    [SerializeField] float aimZ = 10000f;
+    [SerializeField] float maxAimZDist = 500f;
    
     private bool canMove = true;
     private float xThrow, yThrow;
@@ -111,15 +111,31 @@ public class PlayerController : MonoBehaviour
     // Prototype function, tryna have player look at mouse position!
     private void RotatePlayerToMouseAim()
     {
-        Vector3 mousePositionOnScreen = Input.mousePosition;
-        Vector3 positionOnScreen = mainCam.WorldToScreenPoint(transform.position);
-        positionOnScreen.z = 0;
-        mousePositionOnScreen.z = aimZ;
+        // Solution Source! 
+        // https://answers.unity.com/questions/564009/how-to-shoot-exactly-where-mouse-is-third-person.html
+        Vector3 worldPosition = transform.position;
 
-        Vector3 relativePos = mousePositionOnScreen - positionOnScreen;
-        // relativePos = mainCam.ScreenToWorldPoint(relativePos);
-        Quaternion lookRotation = Quaternion.LookRotation(relativePos, Vector3.up);
-        transform.localRotation = lookRotation;
+        RaycastHit hitMouse;
+        Vector3 lookPosition;
+        Ray mouseRay = mainCam.ScreenPointToRay(Input.mousePosition);
+        
+        if(Physics.Raycast(mouseRay, out hitMouse, maxAimZDist))
+        {
+            lookPosition = hitMouse.point;
+        }
+        else
+        {
+            lookPosition = Input.mousePosition;
+            lookPosition.z = worldPosition.z + maxAimZDist;
+            lookPosition = mainCam.ScreenToWorldPoint(lookPosition);
+        }
+
+        Vector3 direction = lookPosition - worldPosition;
+        Debug.DrawLine(lookPosition, worldPosition, Color.green, 0.5f);
+        Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+        
+        transform.rotation = lookRotation;
+
     }
     private void MovePlayer()
     {
