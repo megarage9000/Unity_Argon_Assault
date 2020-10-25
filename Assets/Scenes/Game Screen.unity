@@ -327,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 8977171913664174661, guid: c99181d6513c7844cb938846253f368c,
         type: 3}
       propertyPath: m_Name
-      value: Fighter Drone
+      value: FighterDrone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c99181d6513c7844cb938846253f368c, type: 3}
@@ -697,10 +697,29 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -5736508093153046195, guid: d1131c36cb4d0e148a5cc6f8ca824956, type: 2}
-    value: {fileID: 0}
+  - key: {fileID: -6743657344856057718, guid: d1131c36cb4d0e148a5cc6f8ca824956, type: 2}
+    value: {fileID: 1143386657}
   m_ExposedReferences:
     m_References: []
+--- !u!95 &1143386657
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143386655}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1150120289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,6 +1190,10 @@ PrefabInstance:
     - target: {fileID: 276597364, guid: 39eb73c2b29c3a34ba36211c8de5c057, type: 3}
       propertyPath: aimZ
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 276597364, guid: 39eb73c2b29c3a34ba36211c8de5c057, type: 3}
+      propertyPath: AimSensitivity
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1724915709992614526, guid: 39eb73c2b29c3a34ba36211c8de5c057,
         type: 3}

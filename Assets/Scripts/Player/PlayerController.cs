@@ -68,12 +68,10 @@ public class PlayerController : MonoBehaviour
         // Solution Source! 
         // https://answers.unity.com/questions/564009/how-to-shoot-exactly-where-mouse-is-third-person.html
         Vector3 worldPosition = transform.position;
-
-        RaycastHit hitMouse;
         Vector3 lookPosition;
         Ray mouseRay = mainCam.ScreenPointToRay(Input.mousePosition);
         
-        if(Physics.Raycast(mouseRay, out hitMouse, maxAimZDist))
+        if(Physics.Raycast(mouseRay, out RaycastHit hitMouse, maxAimZDist))
         {
             lookPosition = hitMouse.point;
         }
