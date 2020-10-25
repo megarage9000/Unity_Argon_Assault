@@ -8,36 +8,22 @@ public class PlayerController : MonoBehaviour
 {
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
-    const string MOUSE_X = "Mouse X";
-    const string MOUSE_Y = "Mouse Y";
-
-    const float MAX_ROT_Y = 90f;
-    const float MAX_ROT_X = 90f;
 
     [Header("General movement information")]
     [Tooltip("In ms^-1")] [SerializeField] float movementSpeed = 25f;
     [Tooltip("In m")] [SerializeField] float xRange = 12f;
     [Tooltip("In m")] [SerializeField] float yRange = 6f;
-    
-    [Header("Rotation based on position")]
-    [SerializeField] float pitchPositionFactor= -2f;
-    [SerializeField] float yawPositionFactor = 1f;
-    
-    [Header("Rotation based on movement")]
-    [SerializeField] float pitchControlFactor = -20f;
-    [SerializeField] float rollControlFactor = 20f;
 
     [Header("Weapons")]
     [SerializeField] GameObject[] guns;
 
     [Header("Aim parameters")]
     [Range(0, 1)]
-    [SerializeField] float rotationSensitivity = 0.5f;
+    [SerializeField] float AimSensitivity = 0.5f;
     [SerializeField] float maxAimZDist = 500f;
    
     private bool canMove = true;
     private float xThrow, yThrow;
-    private float rotationX, rotationY;
     private float xMaxRange, xMinRange, yMaxRange, yMinRange;
     private Camera mainCam;
     
@@ -54,9 +40,6 @@ public class PlayerController : MonoBehaviour
         yMaxRange = transform.localPosition.y + yRange;
         yMinRange = transform.localPosition.y - yRange;
 
-        Vector3 rotation = transform.localRotation.eulerAngles;
-        rotationX = rotation.x;
-        rotationY = rotation.y;
         mainCam = gameObject.transform.parent.GetComponent<Camera>();
         
         Debug.Log("X max: " + xMaxRange + ", X min: " + xMinRange + ", Y max: " + yMaxRange + " Y min: " + yMinRange);
@@ -73,40 +56,11 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             MovePlayer();
-            //RotatePlayer();
+            RotatePlayerToMouseAim();
             FireGuns();
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (canMove)
-        {
-            RotatePlayerToMouseAim();
-        }
-    }
-
-
-    private void RotatePlayer()
-    {
-        /*
-         * Remember, the order of rotation matters! Rotating the pitch, then the yaw will
-         * be different than rotation the yaw, then the pitch.
-         */
-
-        // Controls pitch of ship due to y movement and y position
-        float pitchToPosition = transform.localPosition.y * pitchPositionFactor;
-        float pitchToControl = yThrow * pitchControlFactor;
-        float pitch = pitchToPosition + pitchToControl;
-
-        // Controls yaw of ship due to x position
-        float yaw = transform.localPosition.x * yawPositionFactor;
-
-        // Controls roll of ship due to x movement
-        float roll = xThrow * rollControlFactor;
-
-        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
-    }
 
     // Prototype function, tryna have player look at mouse position!
     private void RotatePlayerToMouseAim()
@@ -134,7 +88,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(lookPosition, worldPosition, Color.green, 0.5f);
         Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
         
-        transform.rotation = lookRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, AimSensitivity);
 
     }
     private void MovePlayer()
